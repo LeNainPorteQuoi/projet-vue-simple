@@ -5,26 +5,39 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>Simple</title>
+    <style>
+        .button-activer{
+            display:block;
+            margin : auto;
+        }
+        .btn-primary{
+            background-color:#b0cd5f  ;
+            
+        }
+        #simple{
+            padding:40px;
+        }
+    </style>
 </head>
 <body>
-<div id="simple">
-    <div class="row">
-        <button v-on:click="recuperedPosts" style="display : block;">Activer</button>
-        <div v-for= "post in posts" class="d-none col-sm-3 d-sm-block">               
-        <div class="col-sm-8 offset-sm-1">
-            <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{post.title.rendered}}</h5>
-              <a :href="post.link" class="btn btn-primary" style="background-color:red">Lien</a>
+    <div id="simple">
+        <div class="row">
+            <button v-on:click="recuperedPosts" class="button-activer">Go !</button>
+            <div v-for= "post in posts" class="col-xs-7 col-sm-6 col-lg-6" style="text-align:center; margin-top:20px;">               
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{post.title.rendered}}</h5>
+                        <a :href="post.link" class="btn btn-primary">Lire</a>
+                    </div>
+                </div>
             </div>
-          </div></div>
+        </div>
     </div>
-</div>
 
-    <script>
+    <script>  
         var demo = new Vue({
         el: '#simple',
         data:{
@@ -34,16 +47,22 @@
 
         methods: {
             recuperedPosts: function(){
-                vm = this
+                vm = this               
             fetch('https://aer-recyclage.com/wp-json/wp/v2/posts').then(function(response) {
 				    response.json().then(function(response){
                        console.log(response)
                         vm.posts = response
                     })
             })
+            }        
         }
-    }
-});
-    </script>
+        });
+
+            $(document).ready(function(){
+            $('.button-activer').click(function(){
+                $('.button-activer').fadeToggle('1000');
+            });
+            });
+        </script>
 </body>
 </html>
