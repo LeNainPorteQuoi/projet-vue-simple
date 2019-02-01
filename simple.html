@@ -14,8 +14,7 @@
             margin : auto;
         }
         .btn-primary{
-            background-color:#b0cd5f  ;
-            
+            background-color:#b0cd5f  ; 
         }
         #simple{
             padding:40px;
@@ -29,22 +28,19 @@
             <div v-for= "post in posts" class="col-xs-7 col-sm-6 col-lg-6" style="text-align:center; margin-top:20px;">               
                 <div class="card" >
                     <div class="card-body">
-                        <h5 class="card-title">{{post.title.rendered}}</h5>
+                        <h5 class="card-title" v-html="post.title.rendered"></h5>
                         <a :href="post.link" class="btn btn-primary">Lire</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script>  
         var demo = new Vue({
         el: '#simple',
         data:{
             posts: []
         },
-    
-
         methods: {
             recuperedPosts: function(){
                 vm = this               
@@ -57,7 +53,6 @@
             }        
         }
         });
-
             $(document).ready(function(){
             $('.button-activer').click(function(){
                 $('.button-activer').fadeToggle('1000');
